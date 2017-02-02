@@ -4,5 +4,10 @@
 const DB = require('Database');
 
 module.exports = {
-
+    getAll() {
+        return DB.query('SELECT * FROM users')
+            .then((result) => {
+            return result;
+            })
+    }
 }
