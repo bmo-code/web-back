@@ -1,13 +1,28 @@
-/**
- * Created by Quentin on 02/02/2017.
- */
-const DB = require('Database');
+const db = require('./Database');
 
 module.exports = {
-    getAll() {
-        return DB.query('SELECT * FROM users')
+
+    getAll: function() {
+        return db.query('SELECT * FROM users')
             .then((result) => {
-            return result;
+                return result;
             })
+            .catch((error) => {
+                throw error;
+            });
+    },
+
+    getById: function(id) {
+        return db.query(
+                'SELECT * FROM users WHERE id = $(userId)', {
+                    userId: id
+                })
+            .then((result) => {
+                return result;
+            })
+            .catch((error) => {
+                throw error;
+            });
     }
-}
+
+};
