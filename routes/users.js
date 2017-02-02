@@ -21,7 +21,7 @@ router.delete('/:id', function(req, res, next) {
     var id = parseInt(req.params.id);
     UserDAO.deleteUser(id)
         .then((resp) => {
-            res.send(user);
+            res.send(resp);
         });
 });
 

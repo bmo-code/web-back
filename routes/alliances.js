@@ -7,14 +7,31 @@ router.get('/', function(req, res, next) {
     AlliancesDAO.getAll()
         .then((alliances) => {
             res.status(200).send(alliances);
+        })
+        .catch((error) => {
+            return next(error);
         });
 });
 
 router.get('/:id', function(req, res, next) {
-    var id = parseInt(req.params.id);
+    const id = parseInt(req.params.id);
     AlliancesDAO.getById(id)
         .then((alliance) => {
             res.status(200).send(alliance);
+        })
+        .catch((error) => {
+            return next(error);
+        });
+});
+
+router.delete('/:id', function(req, res, next) {
+    const id = parseInt(req.params.id);
+    AlliancesDAO.deleteAlliance(id)
+        .then((resp) => {
+            res.send(resp);
+        })
+        .catch((error) => {
+            return next(error);
         });
 });
 

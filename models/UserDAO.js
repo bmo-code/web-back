@@ -27,16 +27,12 @@ module.exports = {
     },
 
     deleteUser: function(id) {
-        return charactersDAO.deleteByUserId(id)
-            .then((response) => {
-                const query = "delete from users where id = $1";
-                db.query(query, id)
-                    .then((resp) => {
-                        return resp;
-                    })
-                    .catch((error) => {
-                        throw error;
-                    });
+        const query = "delete from users where id = $(userId)";
+        return db.query(query, {
+                userId: id
+            })
+            .then((resp) => {
+                return resp;
             })
             .catch((error) => {
                 throw error;

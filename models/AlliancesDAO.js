@@ -14,12 +14,24 @@ module.exports = {
 
     getById: function(id) {
         const query = "select * from alliances where id = $(allianceId)";
-        return db.query(
-                query, {
-                    allianceId: id
-                })
+        return db.query(query, {
+                allianceId: id
+            })
             .then((result) => {
                 return result;
+            })
+            .catch((error) => {
+                throw error;
+            });
+    },
+
+    deleteAlliance: function(id) {
+        const query = "delete from alliances where id = $(allianceId)";
+        return db.query(query, {
+                allianceId: id
+            })
+            .then((resp) => {
+                return resp;
             })
             .catch((error) => {
                 throw error;

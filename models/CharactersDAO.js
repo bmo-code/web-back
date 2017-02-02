@@ -24,6 +24,19 @@ module.exports = {
             .catch((error) => {
                 throw error;
             });
+    },
+
+    deleteCharacter: function(id) {
+        const query = "delete from characters where id = $(charactersId)";
+        return db.query(query, {
+                charactersId: id
+            })
+            .then((resp) => {
+                return resp;
+            })
+            .catch((error) => {
+                throw error;
+            });
     }
 
 };

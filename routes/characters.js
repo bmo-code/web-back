@@ -16,6 +16,14 @@ router.get('/:id', function(req, res, next) {
         .then((user) => {
             res.send(user);
         });
-})
+});
+
+router.delete('/:id', function(req, res, next) {
+    const id = parseInt(req.params.id);
+    CharacterDAO.deleteCharacter(id)
+        .then((resp) => {
+            res.send(resp);
+        });
+});
 
 module.exports = router;
