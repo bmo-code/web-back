@@ -24,6 +24,18 @@ router.get('/:id', function(req, res, next) {
         });
 });
 
+router.post('/', function(req, res, next) {
+    const name = req.body.name;
+
+    AlliancesDAO.createAlliance(name)
+        .then((alliance) => {
+            res.status(200).send(alliance);
+        })
+        .catch((error) => {
+            return next(error);
+        });
+});
+
 router.delete('/:id', function(req, res, next) {
     const id = parseInt(req.params.id);
     AlliancesDAO.deleteAlliance(id)

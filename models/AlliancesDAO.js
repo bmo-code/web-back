@@ -25,6 +25,19 @@ module.exports = {
             });
     },
 
+    createAlliance: function(name) {
+        const query = "insert into alliances(name) values(${name}) RETURNING*";
+        return db.query(query, {
+                name: name
+            })
+            .then((result) => {
+                return result;
+            })
+            .catch((error) => {
+                throw error;
+            });
+    },
+
     deleteAlliance: function(id) {
         const query = "delete from alliances where id = $(allianceId)";
         return db.query(query, {
