@@ -1,28 +1,21 @@
 var express = require('express');
 var router = express.Router();
 
-const UserDAO = require('../models/UserDAO');
+const CharacterDAO = require('../models/CharactersDAO');
 
 router.get('/', function(req, res, next) {
-    UserDAO.getAll()
+    CharacterDAO.getAll()
         .then((users) => {
             res.send(users);
         });
 });
 
 router.get('/:id', function(req, res, next) {
-    UserDAO.getById(req.params.id)
+    const id = parseInt(req.params.id);
+    CharacterDAO.getById(id)
         .then((user) => {
             res.send(user);
         });
-});
-
-router.delete('/:id', function(req, res, next) {
-    var id = parseInt(req.params.id);
-    UserDAO.deleteUser(id)
-        .then((resp) => {
-            res.send(user);
-        });
-});
+})
 
 module.exports = router;

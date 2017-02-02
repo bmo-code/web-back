@@ -1,4 +1,5 @@
 const db = require('./Database');
+const charactersDAO = require('./CharactersDAO');
 
 module.exports = {
 
@@ -19,6 +20,23 @@ module.exports = {
                 })
             .then((result) => {
                 return result;
+            })
+            .catch((error) => {
+                throw error;
+            });
+    },
+
+    deleteUser: function(id) {
+        return charactersDAO.deleteByUserId(id)
+            .then((response) => {
+                const query = "delete from users where id = $1";
+                db.query(query, id)
+                    .then((resp) => {
+                        return resp;
+                    })
+                    .catch((error) => {
+                        throw error;
+                    });
             })
             .catch((error) => {
                 throw error;
